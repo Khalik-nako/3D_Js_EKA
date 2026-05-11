@@ -2,12 +2,12 @@ const DEG = Math.PI / 180;
 var myWorld = document.getElementById("world");
 
 var lvl_one_map = [
-    { name: "floor", height: 2000, width: 2000, posX: 0, posY: 100, posZ: 0, rotX: 90, rotY: 0, rotZ: 0, color: "violet", opacity: 0.3, img: "./assets/floor.jfif", bgsize: "15%"},
-    { name: "ceiling", height: 2000, width: 2000, posX: 0, posY: -100, posZ: 0, rotX: 90, rotY: 0, rotZ: 0, color: "green", opacity: 0.3, img: "./assets/sky.jpg",  bgsize: "cover"},
-    { name: "right wall", height: 200, width: 2000, posX: 1000, posY: 0, posZ: 0, rotX: 0, rotY: 90, rotZ: 0, color: "blue", opacity: 0.3, img: "./assets/wall.jpg", bgsize: "15%"},
-    { name: "left wall", height: 200, width: 2000, posX: -1000, posY: 0, posZ: 0, rotX: 0, rotY: 90, rotZ: 0, color: "orange", opacity: 0.3, img: "./assets/wall.jpg", bgsize: "15%"},
-    { name: "front wall", height: 200, width: 2000, posX: 0, posY: 0, posZ: 1000, rotX: 0, rotY: 0, rotZ: 0, color: "#ecc0d1", opacity: 0.3, img: "./assets/wall.jpg", bgsize: "15%"},
-    { name: "hinter wall", height: 200, width: 2000, posX: 0, posY: 0, posZ: -1000, rotX: 0, rotY: 0, rotZ: 0, color: "yellow", opacity: 0.3, img: "./assets/wall.jpg", bgsize: "15%"},
+    { name: "floor", height: 2000, width: 2000, posX: 0, posY: 200, posZ: 0, rotX: 90, rotY: 0, rotZ: 0, color: "violet", opacity: 0.3, img: "./assets/floor.jfif", bgsize: "15%"},
+    { name: "ceiling", height: 2000, width: 2000, posX: 0, posY: -200, posZ: 0, rotX: 90, rotY: 0, rotZ: 0, color: "green", opacity: 0.3, img: "./assets/sky.jpg",  bgsize: "cover"},
+    { name: "right wall", height: 400, width: 2000, posX: 1000, posY: 0, posZ: 0, rotX: 0, rotY: 90, rotZ: 0, color: "blue", opacity: 0.3, img: "./assets/wall.jpg", bgsize: "15%"},
+    { name: "left wall", height: 400, width: 2000, posX: -1000, posY: 0, posZ: 0, rotX: 0, rotY: 90, rotZ: 0, color: "orange", opacity: 0.3, img: "./assets/wall.jpg", bgsize: "15%"},
+    { name: "front wall", height: 400, width: 2000, posX: 0, posY: 0, posZ: 1000, rotX: 0, rotY: 0, rotZ: 0, color: "#ecc0d1", opacity: 0.3, img: "./assets/wall.jpg", bgsize: "15%"},
+    { name: "hinter wall", height: 400, width: 2000, posX: 0, posY: 0, posZ: -1000, rotX: 0, rotY: 0, rotZ: 0, color: "yellow", opacity: 0.3, img: "./assets/wall.jpg", bgsize: "15%"},
 ];
 
 function createWorld(map) {
@@ -70,6 +70,16 @@ document.addEventListener("keydown", (e) => {
     if (e.code == "KeyA") {
         pressRight = pawn.vx;
     }
+    if (e.code == "Space") {
+        myWorld.style.transition = "all 0.3s";
+        pawn.y = 150;   
+         setTimeout(()=>{
+             pawn.y = 0; 
+        }, 300)
+        setTimeout(()=>{
+            myWorld.style.transition = null;
+        }, 400)
+    }
 });
 
 document.addEventListener("keyup", (e) => {
@@ -90,6 +100,7 @@ document.addEventListener("keyup", (e) => {
 document.addEventListener("mousemove", (e) => {
     mouseX = e.movementX;
     mouseY = e.movementY;
+
 });
 
 function update() {
@@ -108,7 +119,7 @@ function update() {
     pawn.ry += dry;
     pawn.rx -= drx;
 
-    myWorld.style.transform = `translateZ(600px) RotateX(${pawn.rx}deg) RotateY(${pawn.ry}deg)translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px) `;
+    myWorld.style.transform = `translateZ(600px) RotateX(${pawn.rx}deg) RotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px) `;
 }
 
 var game = setInterval(update, 10);
